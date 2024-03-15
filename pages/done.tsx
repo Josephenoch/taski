@@ -1,17 +1,14 @@
 import { Urbanist } from "next/font/google";
 import { SearchInput } from "@/components/lib";
 import { CreateTask, Header, Task } from "@/components/secondary";
-import { useEffect, useState } from "react";
-import { TaskType } from "@/types/Task";
-import { getTasksApi } from "@/services/task";
 import { useTasks } from "@/context/TasksContext";
 import { useRouter } from "next/router";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Done() {
   const router = useRouter()
-  const { unCompletedTasks} = useTasks()
+  const { completedTasks} = useTasks()
   return (
     <main
       className={`px-20 pt-10 ${urbanist.className}`}
@@ -22,7 +19,7 @@ export default function Home() {
           Welcome, <span className="text-brand">John</span>. 
         </h3>
         <div className="flex justify-between mt-2 items-center">
-          <span className="text-lg text-brand-slateBlue">You’ve got {unCompletedTasks.length} tasks to do.</span>
+          <span className="text-lg text-brand-slateBlue">You’ve completed {completedTasks.length} tasks.</span>
           <SearchInput onFocus={()=> router.push("/search")}/>
         </div>
       </section>
@@ -32,7 +29,7 @@ export default function Home() {
         <div className="mt-10 space-y-4">
 
         {
-          unCompletedTasks.map(item=>(
+          completedTasks.map(item=>(
             <Task {...item} key={item.id} />
 
           ))
