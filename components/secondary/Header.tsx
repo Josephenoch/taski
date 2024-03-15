@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const Header = () => {
   return (
-    <div className="flex w-full  justify-between">
+    <header className="flex w-full  justify-between">
       <Logo/>
 
       <div className="flex space-x-4 items-center">
@@ -17,7 +17,7 @@ const Header = () => {
         />
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 
