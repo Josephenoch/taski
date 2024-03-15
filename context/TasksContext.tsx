@@ -1,6 +1,8 @@
+import { ExtendedTaskType } from '@/types/Task'
 import { getTasksApi } from '@/services/task'
-import { TaskType } from '@/types/Task'
 import React, { FC, ReactNode, createContext, useContext, useEffect, useState } from 'react'
+
+const content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo officia vel excepturi odit, ratione, enim asperiores cum numquam, accusamus quam id. Ipsa, tenetur minus! Necessitatibus sint corporis maiores rem alias.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo officia vel excepturi odit, ratione, enim asperiores cum numquam, accusamus quam id. Ipsa, tenetur minus! Necessitatibus sint corporis maiores rem alias.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo officia vel excepturi odit, ratione, enim asperiores cum numquam, accusamus quam id. Ipsa, tenetur minus! Necessitatibus sint corporis maiores rem alias."
 
 // Created a enum to achieve single source of truth
 enum CategoryType {
@@ -8,12 +10,13 @@ enum CategoryType {
   UNCOMPLETED = "unCompleted"
 }
 type TasksContextType = {
-  completedTasks: TaskType[]
-  unCompletedTasks: TaskType[]
+  completedTasks: ExtendedTaskType[]
+  unCompletedTasks: ExtendedTaskType[]
   deleteAllUnCompletedTasks: () => void,
+  createTask: (data: ExtendedTaskType) => void,
   changeState: (id:string, completed: boolean) => void,
   deleteTask: (id: string, category: CategoryType) => void,
-  editTask: (data: TaskType, category: CategoryType) => void,
+  editTask: (data: ExtendedTaskType, category: CategoryType) => void,
 }
 
 const TasksContext = createContext({} as TasksContextType)
@@ -27,8 +30,8 @@ const TasksProvider:FC<PropsType> = ({
   children
 }) => {
   const [loading, setLoading] = useState(false)
-  const [completedTasks, setCompletedTasks] = useState<TaskType[]>([])
-  const [unCompletedTasks, setUnCompletedTasks] = useState<TaskType[]>([])
+  const [completedTasks, setCompletedTasks] = useState<ExtendedTaskType[]>([])
+  const [unCompletedTasks, setUnCompletedTasks] = useState<ExtendedTaskType[]>([])
   
 
   const fetchTodos = async () => {
@@ -36,11 +39,13 @@ const TasksProvider:FC<PropsType> = ({
       setLoading(true)
       const {data} = await getTasksApi()
       // this is an expensive operation, but is required because the of a single enpoint
-      const unComplete:TaskType[] = []
-      const complete:TaskType[] = []
+      const unComplete:ExtendedTaskType[] = []
+      const complete:ExtendedTaskType[] = []
+    
       data.forEach(item=>{
-        if(item.completed) complete.push(item)
-        else unComplete.push(item)
+        // the endpoint doesn't come with a content field, so I add lorem text
+        if(item.completed) complete.push({...item, content})
+        else unComplete.push({...item, ...item, content})
       })
       setCompletedTasks(()=> [...complete])
       setUnCompletedTasks(()=> [...unComplete])
@@ -89,6 +94,10 @@ const TasksProvider:FC<PropsType> = ({
     }
   }
 
+  const createTask:TasksContextType["createTask"] = (data) =>{
+    setUnCompletedTasks(prevState=>[{...data}, ...prevState])
+  }
+
   const changeState:TasksContextType["changeState"] = (id, completed) => {
     // if the new state is completed, it means it was in the uncompleted category; vice-versa
     try{
@@ -128,6 +137,7 @@ const TasksProvider:FC<PropsType> = ({
       completedTasks,
       unCompletedTasks,
       editTask,
+      createTask,
       deleteTask,
       changeState,
       deleteAllUnCompletedTasks

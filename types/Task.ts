@@ -4,3 +4,7 @@ export type TaskType = {
   userId: string,
   completed: boolean
 }
+
+export interface ExtendedTaskType extends TaskType  {
+  content: string
+}
