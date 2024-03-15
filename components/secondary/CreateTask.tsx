@@ -2,6 +2,7 @@ import React, { FC, useEffect, useMemo, useRef, useState } from 'react'
 import AddOutline from "@/public/addoutline.svg"
 import EditOutline from "@/public/editoutline.svg"
 import { useRouter } from 'next/router'
+import { useTasks } from '@/context/TasksContext'
 
 type PropsType = {
   initialState: 1 | 2 
@@ -9,6 +10,7 @@ type PropsType = {
 const CreateTask:FC<PropsType> = ({
   initialState
 }) => {
+  const {} = useTasks()
   const [progress, setProgress] = useState<1 | 2>(initialState)
   const titleRef = useRef({} as HTMLInputElement)
   const contentRef = useRef({} as HTMLInputElement)
@@ -16,7 +18,9 @@ const CreateTask:FC<PropsType> = ({
   const handleBTNPressed = (e: KeyboardEvent) => {
 		if (e.key === 'Enter' && progress !== 2) {
 			setProgress(2)
-		}
+		}else if(e.key === 'Enter' && titleRef.current.value && contentRef.current.value){
+
+    }
     if(progress===2 && (document.activeElement !== contentRef.current)){
       titleRef.current?.focus()
     }
