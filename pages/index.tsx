@@ -2,10 +2,26 @@ import Image from "next/image";
 import { Urbanist } from "next/font/google";
 import { Logo, SearchInput } from "@/components/lib";
 import { Header, Task } from "@/components/secondary";
+import { useEffect, useState } from "react";
+import { TaskType } from "@/types/Task";
+import { getTodosApi } from "@/services/task";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
 export default function Home() {
+  const [tasks, setTasks] = useState<TaskType[]>([])
+  const getTodos =async () => {
+    try{
+      const resp = await getTodosApi()
+      console.log(resp.data)
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(()=>{
+    getTodos()
+  },[])
   return (
     <main
       className={`px-20 pt-10 ${urbanist.className}`}
@@ -21,10 +37,9 @@ export default function Home() {
         </div>
       </section>
 
-<section className="mt-10">
-
-      <Task title="Hi" id="Holla" completed userId="1"/>
-</section>
+      <section className="mt-10">
+        <Task title="Hi" id="Holla" completed userId="1"/>
+      </section>
     </main>
   );
 }
