@@ -10,6 +10,7 @@ const Task:FC<TaskType> = ({
   title,
   completed
 }) => {
+  console.log(completed)
   return (
     <section className="group w-full cursor-pointer min-h-[72px] bg-brand-paleWhite rounded-[20px] flex flex-row p-10 space-x-6">
       <CustomCheckBox onClick={()=>{}} selected={completed}/>
