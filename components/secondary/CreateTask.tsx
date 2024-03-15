@@ -3,6 +3,7 @@ import AddOutline from "@/public/addoutline.svg"
 import EditOutline from "@/public/editoutline.svg"
 import { useRouter } from 'next/router'
 import { useTasks } from '@/context/TasksContext'
+import { v4 as uuid } from "uuid"
 
 type PropsType = {
   initialState: 1 | 2 
