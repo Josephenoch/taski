@@ -1,6 +1,6 @@
-import React from 'react'
-import { Logo } from '../lib'
-import Image from 'next/image'
+import React from "react"
+import { Logo } from "../lib"
+import Image from "next/image"
 
 const Header = () => {
   return (

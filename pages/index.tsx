@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Urbanist } from "next/font/google";
 import { Logo, SearchInput } from "@/components/lib";
-import { Header } from "@/components/secondary";
+import { Header, Task } from "@/components/secondary";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -12,13 +12,19 @@ export default function Home() {
     >
       <Header/>
       <section className="mt-8">
-        <div>
         <h3 className="text-[28px] leading-[33.6px] font-bold">
-          Welcome, <span className="text-brandBlue">John</span>. 
+          Welcome, <span className="text-brand">John</span>. 
         </h3>
+        <div className="flex justify-between mt-2 items-center">
+          <span className="text-lg text-brand-slateBlue">You’ve got 7 tasks to do.</span>
+          <SearchInput/>
         </div>
-        <SearchInput/>
       </section>
+
+<section className="mt-10">
+
+      <Task title="Hi" id="Holla" completed userId="1"/>
+</section>
     </main>
   );
 }

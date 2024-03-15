@@ -9,8 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        textBase: "#3F3D56",
-        brandBlue: "#007FFF"
+        brand: {
+          "DEFAULT":"#007FFF",
+          textBase: "#3F3D56",
+          slateBlue: "#8D9CB8",
+          paleWhite: "#F5F7F9",
+          mutedAzure: "#C6CFDC"
+        }
+      },
+      transitionProperty: {
+        "height": "height"
       }
     },
   },
