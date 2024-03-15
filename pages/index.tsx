@@ -1,10 +1,9 @@
-import Image from "next/image";
 import { Urbanist } from "next/font/google";
-import { Logo, SearchInput } from "@/components/lib";
-import { Header, Task } from "@/components/secondary";
+import { SearchInput } from "@/components/lib";
+import { CreateTask, Header, Task } from "@/components/secondary";
 import { useEffect, useState } from "react";
 import { TaskType } from "@/types/Task";
-import { getTodosApi } from "@/services/task";
+import { getTasksApi } from "@/services/task";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -12,7 +11,7 @@ export default function Home() {
   const [tasks, setTasks] = useState<TaskType[]>([])
   const getTodos =async () => {
     try{
-      const resp = await getTodosApi()
+      const resp = await getTasksApi()
       console.log(resp.data)
     }catch(err){
       console.log(err)
@@ -38,7 +37,11 @@ export default function Home() {
       </section>
 
       <section className="mt-10">
+        <CreateTask initialState={1}/>
+        <div className="mt-10">
+
         <Task title="Hi" id="Holla" completed userId="1"/>
+        </div>
       </section>
     </main>
   );
