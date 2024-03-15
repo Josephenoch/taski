@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        textBase: "#3F3D56",
+        brandBlue: "#007FFF"
+      }
     },
   },
   plugins: [],

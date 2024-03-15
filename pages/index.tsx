@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Urbanist } from "next/font/google";
-import { Logo } from "@/components/lib";
+import { Logo, SearchInput } from "@/components/lib";
 import { Header } from "@/components/secondary";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
@@ -14,9 +14,10 @@ export default function Home() {
       <section className="mt-8">
         <div>
         <h3 className="text-[28px] leading-[33.6px] font-bold">
-          Welcome, <span className="text-[#007FFF]">John</span>. 
+          Welcome, <span className="text-brandBlue">John</span>. 
         </h3>
         </div>
+        <SearchInput/>
       </section>
     </main>
   );
