@@ -5,7 +5,7 @@ import React, { FC, ReactNode, createContext, useContext, useEffect, useState } 
 const content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo officia vel excepturi odit, ratione, enim asperiores cum numquam, accusamus quam id. Ipsa, tenetur minus! Necessitatibus sint corporis maiores rem alias.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo officia vel excepturi odit, ratione, enim asperiores cum numquam, accusamus quam id. Ipsa, tenetur minus! Necessitatibus sint corporis maiores rem alias.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo officia vel excepturi odit, ratione, enim asperiores cum numquam, accusamus quam id. Ipsa, tenetur minus! Necessitatibus sint corporis maiores rem alias."
 
 // Created a enum to achieve single source of truth
-enum CategoryType {
+export enum CategoryType {
   COMPLETED= "completed",
   UNCOMPLETED = "unCompleted"
 }
@@ -113,7 +113,6 @@ const TasksProvider:FC<PropsType> = ({
         setCompletedTasks(prevState=>[{...item, completed}, ...prevState])
       }else{
         const itemIdx = completedTasks.findIndex(item=> item.id === id)
-        console.log(itemIdx)
         if(itemIdx< 0) throw new Error("Error, please reload page")
         const item = completedTasks[itemIdx]
 
@@ -130,7 +129,7 @@ const TasksProvider:FC<PropsType> = ({
 
   }
 
-  const deleteAllCompletedTasks = () => {
+  const deleteAllCompletedTasks:TasksContextType["deleteAllCompletedTasks"] = () => {
     setCompletedTasks(()=>[])
   }
   return (

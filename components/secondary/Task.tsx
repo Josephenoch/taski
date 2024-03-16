@@ -3,8 +3,9 @@ import { ExtendedTaskType, TaskType } from "@/types/Task"
 import { CustomCheckBox } from "../lib"
 import CloseIcon from "@/public/cross.svg"
 import EditIcon from "@/public/editicon.svg"
+import DeleteIcon from "@/public/delete.svg"
+import { CategoryType, useTasks } from "@/context/TasksContext"
 import LeadingIcon from "@/public/leadingicon.svg"
-import { useTasks } from "@/context/TasksContext"
 
 
 const Task:FC<ExtendedTaskType> = ({
@@ -14,9 +15,9 @@ const Task:FC<ExtendedTaskType> = ({
   completed
 }) => {
   const [active, setActive] = useState(false)
-  const {changeState} = useTasks()
+  const {changeState, deleteTask} = useTasks()
   const handleComplete = () => {
-   ()=>changeState(id, !completed)
+   changeState(id, !completed)
   }
   return (
     <section onClick={()=> setActive(prevState=> !prevState)} className="w-full cursor-pointer min-h-[72px] bg-brand-paleWhite rounded-[20px] flex flex-row p-5 lg:p-10 space-x-6">
@@ -27,11 +28,14 @@ const Task:FC<ExtendedTaskType> = ({
           {content}
         </p>
       </div>
-    <div className={`hidden lg:flex space-x-4 ${active? "w-auto opacity-100": "w-0 opacity-0-0"}`}>
-      <LeadingIcon/>
-      <EditIcon/>
-      <CloseIcon/>
-    </div>
+    {!completed && (
+      <div className={`hidden lg:flex space-x-4 ${active? "w-auto opacity-100": "w-0 opacity-0-0"}`}>
+        <LeadingIcon/>
+        <EditIcon/>
+        <CloseIcon onClick={()=> deleteTask(id,  CategoryType.UNCOMPLETED)}/>
+      </div>
+    )}
+    {completed && <DeleteIcon onClick={()=> deleteTask(id, CategoryType.COMPLETED)}/>}
     </section>
   )
 }

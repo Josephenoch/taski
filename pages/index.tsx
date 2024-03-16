@@ -42,7 +42,7 @@ export default function Home() {
           ))
         }
         </div>
-        {unCompletedTasks?.length > 0 && (<div className="w-full flex justify-center my-10">
+        {(unCompletedTasks?.length > 0 && itemsToShow < unCompletedTasks?.length)  &&(<div className="w-full flex justify-center my-10">
           <Button onClick={()=> setItemsToShow(prevState=> prevState+7)}>
             <span>See More</span>
           </Button>
