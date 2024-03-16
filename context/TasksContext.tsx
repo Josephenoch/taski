@@ -131,7 +131,7 @@ const TasksProvider:FC<PropsType> = ({
   }
 
   const deleteAllCompletedTasks = () => {
-    setUnCompletedTasks(()=>[])
+    setCompletedTasks(()=>[])
   }
   return (
     <TasksContext.Provider value={{

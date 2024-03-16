@@ -8,17 +8,19 @@ const urbanist = Urbanist({ subsets: ["latin"] });
 
 export default function Done() {
   const router = useRouter()
-  const { completedTasks} = useTasks()
+  const { completedTasks, deleteAllCompletedTasks} = useTasks()
   return (
     <main
-      className={`px-20 pt-10 ${urbanist.className}`}
+      className={`px-8 lg:px-20 pt-10 ${urbanist.className}`}
     >
       <Header/>
       <section className="mt-8">
-        <h3 className="text-[28px] leading-[33.6px] font-bold">
-          Welcome, <span className="text-brand">John</span>. 
+        <h3 className="text-xl lg:text-[28px] lg:leading-[33.6px] font-bold flex justify-between lg:justify-start">
+          <span className="hidden lg:block">Welcome, <span className="text-brand">John</span>. </span>
+          <span className="lg:hidden">Completed tasks</span>
+          <span onClick={deleteAllCompletedTasks} aria-label="button" className="lg:hidden text-base cursor-pointer text-brand-fireRed inline-block underline">Delete all</span>
         </h3>
-        <div className="flex justify-between mt-2 items-center">
+        <div className=" justify-between mt-2 items-center hidden lg:flex">
           <span className="text-lg text-brand-slateBlue">You’ve completed {completedTasks.length} tasks.</span>
           <SearchInput onFocus={()=> router.push("/search")}/>
         </div>

@@ -44,15 +44,15 @@ export default function CreateTaskPage() {
  
   return (
     <main
-      className={`px-20 pt-10 ${urbanist.className}`}
-    >
-      <Header/>
-      <section className="mt-8">
-        <h3 className="text-[28px] leading-[33.6px] font-bold">
-          Welcome, <span className="text-brand">John</span>. 
-        </h3>
+    className={`px-8 lg:px-20 pt-10 ${urbanist.className}`}
+  >
+    <Header/>
+    <section className="mt-8">
+      <h3 className="text-xl lg:text-[28px] lg:leading-[33.6px] font-bold">
+        Welcome, <span className="text-brand">John</span>. 
+      </h3>
         <div className="flex justify-between mt-2 items-center">
-          <span className="text-lg text-brand-slateBlue">Create tasks to achieve more.</span>
+          <span className="lg:text-lg text-brand-slateBlue">Create tasks to achieve more.</span>
         </div>
       </section>
 
@@ -80,19 +80,19 @@ export default function CreateTaskPage() {
       
     </div>
     {progress === 0 && (<div className="w-full h-[50vh] flex flex-col items-center justify-center">
-          <div className="w-[148px] h-[144px] relative ">
+          <div className="w-[82px] h-[80px] lg:w-[148px] lg:h-[144px] relative ">
             <Image
               fill
               alt="no task"
               src="/taskimage.png"
             />
           </div>
-          <span className="text-[16px] text-brand-slateBlue mt-4">You have no tasks listed.</span>
+          <span className="text-brand-slateBlue mt-4">You have no tasks listed.</span>
           
           <Button className="mt-4" onClick={()=> setProgress(1)}>
             <div className="space-x-3 flex items-center">
             <PlusIcon/>
-            <span>Create task</span>
+            <span className="font-semibold">Create task</span>
             </div>
            
           </Button>

@@ -30,18 +30,19 @@ export default function Search() {
   },[searchInput])
   return (
     <main
-      className={`px-20 pt-10 ${urbanist.className}`}
+      className={`px-8 lg:px-20 pt-10 ${urbanist.className}`}
     >
       <Header/>
-      <section className="mt-8">
+      <section className="mt-8 hidden lg:block">
         <h3 className="text-[28px] leading-[33.6px] font-bold">
           Welcome, <span className="text-brand">John</span>. 
         </h3>
         <div className="flex justify-between mt-2 items-center">
           <span className="text-lg text-brand-slateBlue">You’ve got {unCompletedTasks.length} tasks to do.</span>
-          <SearchInput value={searchInput} onChange={(e)=> setSearchInput(e.target.value)}/>
+          <SearchInput className="" value={searchInput} onChange={(e)=> setSearchInput(e.target.value)}/>
         </div>
       </section>
+      <SearchInput containerClassName="lg:hidden w-full mt-10 h-[48px]" value={searchInput} onChange={(e)=> setSearchInput(e.target.value)}/>
 
       <section className="mt-10">
         <div className="mt-10 space-y-4">
