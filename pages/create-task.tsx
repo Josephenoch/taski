@@ -6,7 +6,7 @@ import { Urbanist } from "next/font/google";
 import AddOutline from "@/public/addoutline.svg";
 import { useTasks } from "@/context/TasksContext";
 import EditOutline from "@/public/editoutline.svg";
-import { Header } from "@/components/secondary";
+import { CreateTaskModal, Header } from "@/components/secondary";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 const urbanist = Urbanist({ subsets: ["latin"] });
@@ -18,6 +18,7 @@ export default function CreateTaskPage() {
   const [progress, setProgress] = useState<0|1>(0)
   const contentRef = useRef({} as HTMLInputElement)
   const [contentFocused, setContentFocused] = useState(false)
+  const [mobileModalActive, setMobileModalActive] = useState(false)
 
   const handleBTNPressed = (e: KeyboardEvent) => {
     if(document.activeElement === contentRef.current) setContentFocused(true)
@@ -57,7 +58,7 @@ export default function CreateTaskPage() {
       </section>
 
       <section className="mt-10">
-      <div>
+      <div className="hidden lg:block">
         <div className={`space-x-4 ${progress ===1 ? "flex" :"hidden"}`}>
           <AddOutline color={progress === 1 ? "#007FFF" : "#C6CFDC"}/>
            <input 
@@ -79,7 +80,7 @@ export default function CreateTaskPage() {
         }
       
     </div>
-    {progress === 0 && (<div className="w-full h-[50vh] flex flex-col items-center justify-center">
+    {progress === 0 && (<div className="hidden lg:flex w-full h-[50vh] flex-col items-center justify-center">
           <div className="w-[82px] h-[80px] lg:w-[148px] lg:h-[144px] relative ">
             <Image
               fill
@@ -100,7 +101,27 @@ export default function CreateTaskPage() {
         </div>
           )
         }
+         <div className="flex lg:hidden w-full h-[50vh] flex-col items-center justify-center">
+          <div className="w-[82px] h-[80px] lg:w-[148px] lg:h-[144px] relative ">
+            <Image
+              fill
+              alt="no task"
+              src="/taskimage.png"
+            />
+          </div>
+          <span className="text-brand-slateBlue mt-4">You have no tasks listed.</span>
+          
+          <Button className="mt-4" onClick={()=> setMobileModalActive(()=> true)}>
+            <div className="space-x-3 flex items-center">
+            <PlusIcon/>
+            <span className="font-semibold">Create task</span>
+            </div>
+           
+          </Button>
+       
+        </div>
       </section>
+      <CreateTaskModal active={mobileModalActive} handleActive={()=> setMobileModalActive(prevState=> !prevState)}/>
     </main>
   );
 }
