@@ -25,7 +25,6 @@ export default function Done() {
       </section>
 
       <section className="mt-10">
-        <CreateTask initialState={1}/>
         <div className="mt-10 space-y-4">
 
         {

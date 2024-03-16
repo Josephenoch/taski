@@ -12,7 +12,7 @@ enum CategoryType {
 type TasksContextType = {
   completedTasks: ExtendedTaskType[]
   unCompletedTasks: ExtendedTaskType[]
-  deleteAllUnCompletedTasks: () => void,
+  deleteAllCompletedTasks: () => void,
   createTask: (data: ExtendedTaskType) => void,
   changeState: (id:string, completed: boolean) => void,
   deleteTask: (id: string, category: CategoryType) => void,
@@ -101,24 +101,25 @@ const TasksProvider:FC<PropsType> = ({
   const changeState:TasksContextType["changeState"] = (id, completed) => {
     // if the new state is completed, it means it was in the uncompleted category; vice-versa
     try{
-
       if(completed){
         const itemIdx = unCompletedTasks.findIndex(item=> item.id === id)
         if(itemIdx< 0) throw new Error("Error, please reload page")
         const item = unCompletedTasks[itemIdx]
         setUnCompletedTasks(prevState=>{
           const newData = [...prevState]
-          newData.slice(itemIdx, 1)
+          newData.splice(itemIdx, 1)
           return newData
         })
         setCompletedTasks(prevState=>[{...item, completed}, ...prevState])
       }else{
         const itemIdx = completedTasks.findIndex(item=> item.id === id)
+        console.log(itemIdx)
         if(itemIdx< 0) throw new Error("Error, please reload page")
         const item = completedTasks[itemIdx]
+
         setCompletedTasks(prevState=>{
           const newData = [...prevState]
-          newData.slice(itemIdx, 1)
+          newData.splice(itemIdx, 1)
           return newData
         })
         setUnCompletedTasks(prevState=>[{...item, completed}, ...prevState])
@@ -129,7 +130,7 @@ const TasksProvider:FC<PropsType> = ({
 
   }
 
-  const deleteAllUnCompletedTasks = () => {
+  const deleteAllCompletedTasks = () => {
     setUnCompletedTasks(()=>[])
   }
   return (
@@ -140,7 +141,7 @@ const TasksProvider:FC<PropsType> = ({
       createTask,
       deleteTask,
       changeState,
-      deleteAllUnCompletedTasks
+      deleteAllCompletedTasks
     }}>
       {children}
     </TasksContext.Provider>

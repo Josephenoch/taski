@@ -1,9 +1,8 @@
 import { Urbanist } from "next/font/google";
 import { SearchInput } from "@/components/lib";
 import { useTasks } from "@/context/TasksContext";
-import { CreateTask, Header, Task } from "@/components/secondary";
+import {  Header, Task } from "@/components/secondary";
 import { FC, useMemo, useState } from "react";
-import { ExtendedTaskType } from "@/types/Task";
 import Image from "next/image";
 
 const urbanist = Urbanist({ subsets: ["latin"] });

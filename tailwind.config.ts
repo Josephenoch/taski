@@ -14,7 +14,8 @@ const config: Config = {
           textBase: "#3F3D56",
           slateBlue: "#8D9CB8",
           paleWhite: "#F5F7F9",
-          mutedAzure: "#C6CFDC"
+          mutedAzure: "#C6CFDC",
+          fireRed: "#FF5E5E"
         }
       },
       transitionProperty: {
