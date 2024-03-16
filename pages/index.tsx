@@ -7,13 +7,15 @@ import { getTasksApi } from "@/services/task";
 import { useTasks } from "@/context/TasksContext";
 import { useRouter } from "next/router";
 import LeadingIcon from "@/public/leadingicon.svg"
+import Link from "next/link";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
 export default function Home() {
   const router = useRouter()
+  const [itemsToShow, setItemsToShow] = useState(7)
+  const [showCompleted, setShowCompleted] = useState(true)
   const { unCompletedTasks, completedTasks, deleteAllCompletedTasks} = useTasks()
-  const [showCompleted, setShowCompleted] = useState(false)
   return (
     <main
       className={`px-20 pt-10 ${urbanist.className}`}
@@ -34,12 +36,17 @@ export default function Home() {
         <div className="mt-10 space-y-4">
 
         {
-          unCompletedTasks.slice(0,7).map(item=>(
+          unCompletedTasks.slice(0,itemsToShow).map(item=>(
             <Task {...item} key={item.id} />
 
           ))
         }
         </div>
+        {unCompletedTasks?.length > 0 && (<div className="w-full flex justify-center my-10">
+          <Button onClick={()=> setItemsToShow(prevState=> prevState+7)}>
+            <span>See More</span>
+          </Button>
+        </div>)}
       </section>
       {
         completedTasks.length > 0 && (
@@ -64,12 +71,19 @@ export default function Home() {
 
           ))
         }
+        
         </div>
+        {showCompleted &&(
+        <div className="w-full flex justify-center my-10">
+          <Button>
+            <Link className="w-full h-full flex items-center justify-center" href="/done">See More</Link>
+          </Button>
+        </div>
+        )}
       </section>
         )
       }
 
-      <Button>Hey</Button>
 
     </main>
   );

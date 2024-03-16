@@ -5,19 +5,22 @@ import { useTasks } from '@/context/TasksContext'
 import { v4 as uuid } from "uuid"
 
 type PropsType = {
-  initialState: 1 | 2 
+  initialState:  1 | 2,
+
 }
 
 const CreateTask:FC<PropsType> = ({
   initialState
 }) => {
   const {createTask} = useTasks()
-  const [progress, setProgress] = useState<1 | 2>(initialState)
   const titleRef = useRef({} as HTMLInputElement)
   const contentRef = useRef({} as HTMLInputElement)
+  const [progress, setProgress] = useState<1 | 2>(initialState)
+  const [contentFocused, setContentFocused] = useState(false)
 
   const handleBTNPressed = (e: KeyboardEvent) => {
-		if (e.key === 'Enter' && progress !== 2) {
+    if(document.activeElement === contentRef.current) setContentFocused(true)
+		if (e.key === 'Enter' && (progress !== 2)) {
 			setProgress(2)
 		}else if(e.key === 'Enter' && titleRef.current.value && contentRef.current.value){
       const id = uuid()
@@ -37,22 +40,16 @@ const CreateTask:FC<PropsType> = ({
     }
 	}
 
+  
+
   useEffect(()=>{
     document.addEventListener('keydown', handleBTNPressed)
     return () => document.removeEventListener("keydown", handleBTNPressed)
   })
 
 
-  const isContentFocused = useMemo(()=>{
-    if(typeof document === 'undefined') return false
-    if(document?.activeElement !== contentRef?.current ) return true
-    return false
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[typeof document])
-
   return (
     <div>
-      
         <div className="space-x-4 flex">
           <AddOutline color={progress === 2 ? "#007FFF" : "#C6CFDC"}/>
           { progress === 1 &&<span className="text-brand-slateBlue">Tap “Enter” to create task</span>}
@@ -65,7 +62,7 @@ const CreateTask:FC<PropsType> = ({
         </div>
         {
         <div className={`space-x-4 ${progress ===2 ? "flex" :"hidden"} mt-4`}>
-          <EditOutline color={isContentFocused ? "#007FFF" : "#C6CFDC"}/>
+          <EditOutline color={contentFocused ? "#007FFF" : "#C6CFDC"}/>
           { progress === 1 &&<span className="text-brand-slateBlue">Tap “Enter” to create task</span>}
            <input 
             ref={contentRef} 
