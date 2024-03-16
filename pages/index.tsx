@@ -18,16 +18,16 @@ export default function Home() {
   const { unCompletedTasks, completedTasks, deleteAllCompletedTasks} = useTasks()
   return (
     <main
-      className={`px-20 pt-10 ${urbanist.className}`}
+      className={`px-8 lg:px-20 pt-10 ${urbanist.className}`}
     >
       <Header/>
       <section className="mt-8">
-        <h3 className="text-[28px] leading-[33.6px] font-bold">
+        <h3 className="text-xl lg:text-[28px] lg:leading-[33.6px] font-bold">
           Welcome, <span className="text-brand">John</span>. 
         </h3>
         <div className="flex justify-between mt-2 items-center">
-          <span className="text-lg text-brand-slateBlue">You’ve got {unCompletedTasks.length} tasks to do.</span>
-          <SearchInput onFocus={()=> router.push("/search")}/>
+          <span className="lg:text-lg text-brand-slateBlue">You’ve got {unCompletedTasks.length} tasks to do.</span>
+          <SearchInput containerClassName="hidden lg:block" onFocus={()=> router.push("/search")}/>
         </div>
       </section>
 

@@ -49,7 +49,7 @@ const CreateTask:FC<PropsType> = ({
 
 
   return (
-    <div>
+    <div className="lg:block hidden">
         <div className="space-x-4 flex">
           <AddOutline color={progress === 2 ? "#007FFF" : "#C6CFDC"}/>
           { progress === 1 &&<span className="text-brand-slateBlue">Tap “Enter” to create task</span>}
