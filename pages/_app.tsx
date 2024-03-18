@@ -22,11 +22,8 @@ export default function App({ Component, pageProps }: AppProps) {
         property="og:description"
         content="Taski: Your ultimate task scheduling app for efficient planning and accomplishment. Organize, prioritize, and conquer tasks seamlessly"
       />
-      <meta property="og:image" content="<generated>" />
-      <meta property="og:image:type" content="<generated>" />
-      <meta property="og:image:width" content="<generated>" />
-      <meta property="og:image:height" content="<generated>" />
-      <meta property="og:site_name" content="Taski" />
+      <meta property="og:image" content="/social-preview.png" />
+      
 
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="Taski" />
@@ -36,10 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
         content="Taski - Manage tasks effectively"
       />
       <meta name="twitter:creator" content="@techbrojoe" />
-      <meta name="twitter:image" content="<generated>" />
-      <meta name="twitter:image:type" content="<generated>" />
-      <meta name="twitter:image:width" content="<generated>" />
-      <meta name="twitter:image:height" content="<generated>" />
+      <meta name="twitter:image" content="/social-preview.png" />
 
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
