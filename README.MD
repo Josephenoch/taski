@@ -48,8 +48,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+[Project Link](https://taski.josephenoch.com)
+<br>
+<br>
 <a href="https://github.com/Josephenoch/taski">
-    <img src="https://taski.josephenoch.com/social-preview.png" alt="Chat-up">
+    <img src="https://taski.josephenoch.com/social-preview.png" alt="Taski">
   </a>
 
 
