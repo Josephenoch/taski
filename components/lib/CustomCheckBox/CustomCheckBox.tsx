@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react"
 import Checked from "@/public/checked.svg"
+import Image from "next/image"
 
 
 type PropsType = {
@@ -21,7 +22,15 @@ const CustomCheckBox:FC<PropsType> = ({
     onClick={handleClick}
       className={`size-6 ${selected? "" :"border-brand-mutedAzure border-2 "} rounded-[7px] cursor-pointer`}>
       {
-        selected && <Checked/>
+        selected && (
+          <Image
+            data-testid="checked"
+            src="checked.svg"
+            width={24}
+            height={24}
+            alt="check"
+          />
+        )
       }
     </div>
   )

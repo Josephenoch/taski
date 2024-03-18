@@ -17,7 +17,7 @@ const Task:FC<ExtendedTaskType> = ({
    changeState(id, !completed)
   }
   return (
-    <section onClick={()=> setActive(prevState=> !prevState)} className="w-full cursor-pointer min-h-[72px] bg-brand-paleWhite rounded-[20px] flex flex-row p-5 lg:p-10 space-x-6">
+    <section data-testid="task" onClick={()=> setActive(prevState=> !prevState)} className="w-full cursor-pointer min-h-[72px] bg-brand-paleWhite rounded-[20px] flex flex-row p-5 lg:p-10 space-x-6">
       <CustomCheckBox onClick={handleComplete} selected={completed}/>
       <div className="w-[90%]">
         <p className={` lg:text-lg font-semibold ${completed ?"line-through": ""}`}>{title}</p>
@@ -26,7 +26,7 @@ const Task:FC<ExtendedTaskType> = ({
         </p>
       </div>
     {!completed && (
-      <div className={`hidden lg:flex space-x-4 ${active? "w-auto opacity-100": "w-0 opacity-0-0"}`}>
+      <div data-testid="uncompleted" className={`hidden lg:flex h-[30px] space-x-4 ${active? "w-auto opacity-100": "w-0 opacity-0-0"}`}>
         <Image
           src="/leadingicon.svg"
           width={30}
@@ -40,7 +40,8 @@ const Task:FC<ExtendedTaskType> = ({
           alt="edit icon"
         />
          <Image
-          src="/cross"
+          data-testid="delete"
+          src="/cross.svg"
           width={30}
           height={30}
           alt="close icon"
@@ -50,7 +51,8 @@ const Task:FC<ExtendedTaskType> = ({
       </div>
     )}
     {completed &&  <Image
-          src="/deleteicon"
+          data-testid="delete"
+          src="/delete.svg"
           width={30}
           height={30}
           alt="delete icon"

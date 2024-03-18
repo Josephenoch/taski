@@ -1,9 +1,7 @@
 import { Urbanist } from "next/font/google";
 import { Button, SearchInput } from "@/components/lib";
 import { CreateTask, Header, Task } from "@/components/secondary";
-import { useEffect, useState } from "react";
-import { TaskType } from "@/types/Task";
-import { getTasksApi } from "@/services/task";
+import {  useState } from "react";
 import { useTasks } from "@/context/TasksContext";
 import { useRouter } from "next/router";
 import LeadingIcon from "@/public/leadingicon.svg"

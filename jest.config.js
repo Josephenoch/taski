@@ -15,9 +15,7 @@ const config = {
   preset: "ts-jest",
   moduleNameMapper: {
   },
-  transform:{
-    '^.+\\.svg$': '<rootDir>/__mocks__/jestSvgTransformer.js'
-  },
+
   moduleDirectories: ['node_modules', 'src']
 }
  
