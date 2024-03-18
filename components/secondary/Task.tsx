@@ -1,11 +1,8 @@
 import React, { FC, useState } from "react"
-import { ExtendedTaskType, TaskType } from "@/types/Task"
+import { ExtendedTaskType} from "@/types/Task"
 import { CustomCheckBox } from "../lib"
-import CloseIcon from "@/public/cross.svg"
-import EditIcon from "@/public/editicon.svg"
-import DeleteIcon from "@/public/delete.svg"
 import { CategoryType, useTasks } from "@/context/TasksContext"
-import LeadingIcon from "@/public/leadingicon.svg"
+import Image from "next/image"
 
 
 const Task:FC<ExtendedTaskType> = ({
@@ -30,12 +27,35 @@ const Task:FC<ExtendedTaskType> = ({
       </div>
     {!completed && (
       <div className={`hidden lg:flex space-x-4 ${active? "w-auto opacity-100": "w-0 opacity-0-0"}`}>
-        <LeadingIcon/>
-        <EditIcon/>
-        <CloseIcon onClick={()=> deleteTask(id,  CategoryType.UNCOMPLETED)}/>
+        <Image
+          src="/leadingicon.svg"
+          width={30}
+          height={30}
+          alt="leading icon"
+        />
+         <Image
+          src="/editicon.svg"
+          width={30}
+          height={30}
+          alt="edit icon"
+        />
+         <Image
+          src="/cross"
+          width={30}
+          height={30}
+          alt="close icon"
+          onClick={()=> deleteTask(id,  CategoryType.UNCOMPLETED)}
+        />
+      
       </div>
     )}
-    {completed && <DeleteIcon onClick={()=> deleteTask(id, CategoryType.COMPLETED)}/>}
+    {completed &&  <Image
+          src="/deleteicon"
+          width={30}
+          height={30}
+          alt="delete icon"
+          onClick={()=> deleteTask(id,  CategoryType.COMPLETED)}
+        />}
     </section>
   )
 }

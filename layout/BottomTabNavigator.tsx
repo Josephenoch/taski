@@ -9,7 +9,7 @@ import SearchTabIcon from "@/public/search-tab-icon.svg";
 const BottomTabNavigator = () => {
   const router = useRouter()
   return (
-    <footer className="flex fixed lg:hidden border-t-2 border-t-[#F5F7F9] bg-white h-[100px] bottom-0 w-full items-center px-20 justify-between">
+    <footer className="flex fixed lg:hidden border-t-2 border-t-[#F5F7F9] bg-white h-[100px] bottom-0 w-full items-center px-10 justify-between">
       <TabItem route="/" title="Todo" icon={<TodoTabIcon color={router.pathname === "/" ? "#007FFF" : "#C6CFDC"}/>}/>
       <TabItem route="/create-task" title="Create" icon={<CreateTabIcon color={router.pathname === "/create-task" ? "#007FFF" : "#C6CFDC"}/>}/>
       <TabItem route="/search" title="Search" icon={<SearchTabIcon color={router.pathname === "/search" ? "#007FFF" : "#C6CFDC"}/>}/>
