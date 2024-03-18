@@ -10,6 +10,7 @@ export enum CategoryType {
   UNCOMPLETED = "unCompleted"
 }
 type TasksContextType = {
+  loading: boolean,
   completedTasks: ExtendedTaskType[]
   unCompletedTasks: ExtendedTaskType[]
   deleteAllCompletedTasks: () => void,
@@ -134,6 +135,7 @@ const TasksProvider:FC<PropsType> = ({
   }
   return (
     <TasksContext.Provider value={{
+      loading,
       completedTasks,
       unCompletedTasks,
       editTask,

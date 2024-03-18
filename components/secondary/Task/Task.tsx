@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react"
 import { ExtendedTaskType} from "@/types/Task"
-import { CustomCheckBox } from "../lib"
+import { CustomCheckBox } from "../../lib"
 import { CategoryType, useTasks } from "@/context/TasksContext"
 import Image from "next/image"
 
@@ -17,7 +17,7 @@ const Task:FC<ExtendedTaskType> = ({
    changeState(id, !completed)
   }
   return (
-    <section data-testid="task" onClick={()=> setActive(prevState=> !prevState)} className="w-full cursor-pointer min-h-[72px] bg-brand-paleWhite rounded-[20px] flex flex-row p-5 lg:p-10 space-x-6">
+    <section data-testid={completed ? "completed-task" : "uncompleted-task"} onClick={()=> setActive(prevState=> !prevState)} className="w-full cursor-pointer min-h-[72px] bg-brand-paleWhite rounded-[20px] flex flex-row p-5 lg:p-10 space-x-6">
       <CustomCheckBox onClick={handleComplete} selected={completed}/>
       <div className="w-[90%]">
         <p className={` lg:text-lg font-semibold ${completed ?"line-through": ""}`}>{title}</p>

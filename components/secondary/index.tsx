@@ -1,4 +1,5 @@
 export {default as Header} from "./Header"
-export {default as Task} from "./Task"
+export {default as Task} from "./Task/Task"
+export {default as TaskSkeletonLoader} from "./Task/TaskSkeletonLoader"
 export {default as CreateTask} from "./CreateTask/CreateTask"
 export {default as CreateTaskModal} from "./CreateTaskModal"

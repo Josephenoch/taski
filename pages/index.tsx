@@ -1,6 +1,6 @@
 import { Urbanist } from "next/font/google";
 import { Button, SearchInput } from "@/components/lib";
-import { CreateTask, Header, Task } from "@/components/secondary";
+import { CreateTask, Header, Task, TaskSkeletonLoader } from "@/components/secondary";
 import {  useState } from "react";
 import { useTasks } from "@/context/TasksContext";
 import { useRouter } from "next/router";
@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter()
   const [itemsToShow, setItemsToShow] = useState(7)
   const [showCompleted, setShowCompleted] = useState(true)
-  const { unCompletedTasks, completedTasks, deleteAllCompletedTasks} = useTasks()
+  const { unCompletedTasks, completedTasks, loading, deleteAllCompletedTasks} = useTasks()
   return (
     <main
       className={`px-8 lg:px-20 pt-10 ${urbanist.className}`}
@@ -32,7 +32,17 @@ export default function Home() {
       <section className="mt-10">
         <CreateTask initialState={1}/>
         <div className="mt-10 space-y-4">
-
+          {
+            loading &&(
+              <>
+                <TaskSkeletonLoader textWidth="w-[30%]"/>
+                <TaskSkeletonLoader textWidth="w-[40%]"/>
+                <TaskSkeletonLoader textWidth="w-[20%]"/>
+                <TaskSkeletonLoader textWidth="w-[35%]"/>
+              </>
+            )
+          }
+         
         {
           unCompletedTasks.slice(0,itemsToShow).map(item=>(
             <Task {...item} key={item.id} />
@@ -41,7 +51,7 @@ export default function Home() {
         }
         </div>
         {(unCompletedTasks?.length > 0 && itemsToShow < unCompletedTasks?.length)  &&(<div className="w-full flex justify-center my-10">
-          <Button onClick={()=> setItemsToShow(prevState=> prevState+7)}>
+          <Button data-testid="see-more-uncompleted" onClick={()=> setItemsToShow(prevState=> prevState+7)}>
             <span>See More</span>
           </Button>
         </div>)}
@@ -73,7 +83,7 @@ export default function Home() {
         </div>
         {showCompleted &&(
         <div className="w-full flex justify-center my-10">
-          <Button>
+          <Button >
             <Link className="w-full h-full flex items-center justify-center" href="/done">See More</Link>
           </Button>
         </div>
